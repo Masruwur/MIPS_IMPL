@@ -89,7 +89,7 @@ def assemble(lines: list[str],labels: dict[str,str]):
                 if imdt>15 :
                     raise ValueError("offset too large")
                 
-                ins = opcodes[op] + registers[memReg] + registers[vals[0]] + format(imdt,'04b')
+                ins = opcodes[op] + registers[vals[0]] + registers[memReg] + format(imdt,'04b')
                 
             else:
                 imdt = int(vals[2])
