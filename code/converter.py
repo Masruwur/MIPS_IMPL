@@ -60,13 +60,13 @@ def assemble(lines: list[str],labels: dict[str,str]):
 
         ins = None
         if op in instruction_types['R']:
-            ins = opcodes[op] + registers[vals[0]] + registers[vals[1]] + registers[vals[2]]
+            ins = opcodes[op] + registers[vals[1]] + registers[vals[2]] + registers[vals[0]]
             
         elif op in instruction_types['S']:
             imdt = int(vals[2])
             if imdt > 15:
                 raise ValueError("shift too large")
-            ins = opcodes[op] + registers[vals[0]] + registers[vals[1]] + format(imdt,'04b')
+            ins = opcodes[op] + registers[vals[1]] + registers[vals[0]] + format(imdt,'04b')
     
         elif op in instruction_types['J']:
             ins = opcodes[op] + labels[vals[0]] + format(0,'04b')
@@ -78,7 +78,7 @@ def assemble(lines: list[str],labels: dict[str,str]):
                     raise ValueError("invalid branch")
                 imdt = format(offset & 0xF,'04b')
 
-                ins = opcodes[op] + registers[vals[0]] + registers[vals[1]] + imdt
+                ins = opcodes[op] + registers[vals[1]] + registers[vals[0]] + imdt
             
             elif op in ['lw','sw']:
                 match = re.search(pattern,vals[1])
@@ -89,14 +89,14 @@ def assemble(lines: list[str],labels: dict[str,str]):
                 if imdt>15 :
                     raise ValueError("offset too large")
                 
-                ins = opcodes[op] + registers[vals[0]] + registers[memReg] + format(imdt,'04b')
+                ins = opcodes[op] + registers[memReg] + registers[vals[0]] + format(imdt,'04b')
                 
             else:
                 imdt = int(vals[2])
                 if imdt>15 :
                      raise ValueError("value too large")
                 
-                ins = opcodes[op] + registers[vals[0]] + registers[vals[1]] + format(imdt,'04b')
+                ins = opcodes[op] + registers[vals[1]] + registers[vals[0]] + format(imdt,'04b')
 
         else:
             raise ValueError("invalid operation")
@@ -104,13 +104,13 @@ def assemble(lines: list[str],labels: dict[str,str]):
         decoded.append(ins)
         idx += 1
     
-    return hexate(decoded)
+    return hexate(decoded,4)
 
-def hexate(binaries):
+def hexate(binaries,size):
     hex_vals = []
     for binary in binaries:
         val = int(binary,2)
-        hex = format(val,'04x')
+        hex = format(val,f'0{size}x')
         hex_vals.append(hex)
 
     return hex_vals

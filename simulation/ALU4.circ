@@ -5,9 +5,15 @@
   <lib desc="#Wiring" name="0">
     <tool name="Splitter">
       <a name="facing" val="west"/>
-      <a name="fanout" val="3"/>
-      <a name="incoming" val="3"/>
+      <a name="incoming" val="8"/>
       <a name="appear" val="center"/>
+      <a name="bit1" val="0"/>
+      <a name="bit2" val="0"/>
+      <a name="bit3" val="0"/>
+      <a name="bit4" val="1"/>
+      <a name="bit5" val="1"/>
+      <a name="bit6" val="1"/>
+      <a name="bit7" val="1"/>
     </tool>
     <tool name="Bit Extender">
       <a name="in_width" val="4"/>
@@ -18,9 +24,8 @@
   <lib desc="#Gates" name="1"/>
   <lib desc="#Plexers" name="2">
     <tool name="Multiplexer">
-      <a name="select" val="3"/>
-      <a name="width" val="4"/>
-      <a name="enable" val="false"/>
+      <a name="select" val="2"/>
+      <a name="width" val="8"/>
     </tool>
   </lib>
   <lib desc="#Arithmetic" name="3"/>
@@ -92,9 +97,11 @@
     <wire from="(390,330)" to="(390,340)"/>
     <wire from="(450,170)" to="(760,170)"/>
     <wire from="(470,90)" to="(470,240)"/>
+    <wire from="(460,580)" to="(460,600)"/>
     <wire from="(830,310)" to="(830,590)"/>
     <wire from="(300,490)" to="(410,490)"/>
     <wire from="(300,550)" to="(410,550)"/>
+    <wire from="(300,610)" to="(410,610)"/>
     <wire from="(210,180)" to="(250,180)"/>
     <wire from="(470,690)" to="(570,690)"/>
     <wire from="(520,620)" to="(520,640)"/>
@@ -109,6 +116,7 @@
     <wire from="(540,640)" to="(570,640)"/>
     <wire from="(390,180)" to="(410,180)"/>
     <wire from="(390,400)" to="(410,400)"/>
+    <wire from="(460,580)" to="(800,580)"/>
     <wire from="(320,200)" to="(320,240)"/>
     <wire from="(400,380)" to="(400,420)"/>
     <wire from="(420,240)" to="(430,240)"/>
@@ -117,6 +125,7 @@
     <wire from="(380,340)" to="(390,340)"/>
     <wire from="(320,240)" to="(400,240)"/>
     <wire from="(250,470)" to="(250,530)"/>
+    <wire from="(250,530)" to="(250,590)"/>
     <wire from="(430,90)" to="(430,150)"/>
     <wire from="(730,250)" to="(810,250)"/>
     <wire from="(300,270)" to="(300,390)"/>
@@ -143,81 +152,41 @@
     <wire from="(250,180)" to="(250,340)"/>
     <wire from="(250,470)" to="(410,470)"/>
     <wire from="(250,530)" to="(410,530)"/>
+    <wire from="(250,590)" to="(410,590)"/>
     <wire from="(210,270)" to="(300,270)"/>
     <wire from="(440,540)" to="(790,540)"/>
     <wire from="(320,200)" to="(340,200)"/>
     <wire from="(390,330)" to="(410,330)"/>
+    <wire from="(800,290)" to="(800,580)"/>
     <wire from="(420,250)" to="(430,250)"/>
     <wire from="(420,230)" to="(430,230)"/>
     <wire from="(400,350)" to="(410,350)"/>
     <wire from="(740,260)" to="(810,260)"/>
     <wire from="(440,480)" to="(770,480)"/>
+    <wire from="(450,600)" to="(460,600)"/>
     <wire from="(300,390)" to="(310,390)"/>
     <wire from="(380,190)" to="(390,190)"/>
     <wire from="(760,170)" to="(760,230)"/>
     <wire from="(300,490)" to="(300,550)"/>
+    <wire from="(300,550)" to="(300,610)"/>
     <wire from="(570,640)" to="(570,690)"/>
     <wire from="(390,340)" to="(390,400)"/>
+    <wire from="(800,290)" to="(810,290)"/>
     <wire from="(450,410)" to="(520,410)"/>
-    <comp lib="0" loc="(380,340)" name="Bit Extender">
-      <a name="in_width" val="4"/>
-      <a name="out_width" val="8"/>
-    </comp>
     <comp lib="0" loc="(210,180)" name="Pin">
       <a name="width" val="4"/>
       <a name="tristate" val="false"/>
       <a name="label" val="d1"/>
     </comp>
-    <comp lib="0" loc="(530,660)" name="Splitter">
-      <a name="facing" val="north"/>
-      <a name="fanout" val="4"/>
-      <a name="incoming" val="4"/>
-      <a name="appear" val="center"/>
-    </comp>
-    <comp lib="0" loc="(560,410)" name="Bit Extender">
-      <a name="out_width" val="4"/>
-    </comp>
-    <comp lib="0" loc="(530,600)" name="Splitter">
-      <a name="facing" val="south"/>
-      <a name="fanout" val="3"/>
-      <a name="incoming" val="3"/>
-      <a name="appear" val="center"/>
-    </comp>
-    <comp lib="3" loc="(450,340)" name="Shifter"/>
-    <comp lib="0" loc="(530,660)" name="Pin">
-      <a name="facing" val="north"/>
-      <a name="width" val="4"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="ctrl"/>
+    <comp lib="0" loc="(380,340)" name="Bit Extender">
+      <a name="in_width" val="4"/>
+      <a name="out_width" val="8"/>
     </comp>
     <comp lib="0" loc="(350,380)" name="Splitter">
       <a name="facing" val="west"/>
       <a name="fanout" val="3"/>
       <a name="incoming" val="3"/>
       <a name="appear" val="center"/>
-    </comp>
-    <comp lib="0" loc="(210,270)" name="Pin">
-      <a name="width" val="4"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="d2"/>
-    </comp>
-    <comp lib="1" loc="(440,480)" name="AND Gate">
-      <a name="width" val="4"/>
-      <a name="size" val="30"/>
-      <a name="inputs" val="2"/>
-    </comp>
-    <comp lib="0" loc="(560,340)" name="Bit Extender">
-      <a name="out_width" val="4"/>
-    </comp>
-    <comp lib="1" loc="(440,540)" name="OR Gate">
-      <a name="width" val="4"/>
-      <a name="size" val="30"/>
-      <a name="inputs" val="2"/>
-    </comp>
-    <comp lib="2" loc="(850,270)" name="Multiplexer">
-      <a name="select" val="3"/>
-      <a name="width" val="4"/>
-      <a name="enable" val="false"/>
     </comp>
     <comp lib="0" loc="(890,270)" name="Pin">
       <a name="facing" val="west"/>
@@ -226,26 +195,76 @@
       <a name="label" val="outp"/>
       <a name="labelloc" val="east"/>
     </comp>
-    <comp lib="0" loc="(400,240)" name="Splitter">
+    <comp lib="0" loc="(310,390)" name="Splitter">
       <a name="fanout" val="4"/>
       <a name="incoming" val="4"/>
       <a name="appear" val="center"/>
+    </comp>
+    <comp lib="1" loc="(450,600)" name="NOR Gate">
+      <a name="width" val="4"/>
+      <a name="size" val="30"/>
+      <a name="inputs" val="2"/>
+    </comp>
+    <comp lib="3" loc="(450,340)" name="Shifter"/>
+    <comp lib="0" loc="(560,340)" name="Bit Extender">
+      <a name="out_width" val="4"/>
     </comp>
     <comp lib="1" loc="(380,190)" name="XOR Gate">
       <a name="width" val="4"/>
       <a name="size" val="30"/>
       <a name="inputs" val="2"/>
     </comp>
-    <comp lib="0" loc="(310,390)" name="Splitter">
+    <comp lib="0" loc="(530,660)" name="Splitter">
+      <a name="facing" val="north"/>
       <a name="fanout" val="4"/>
       <a name="incoming" val="4"/>
       <a name="appear" val="center"/>
     </comp>
+    <comp lib="1" loc="(440,480)" name="AND Gate">
+      <a name="width" val="4"/>
+      <a name="size" val="30"/>
+      <a name="inputs" val="2"/>
+    </comp>
     <comp lib="3" loc="(450,170)" name="Adder">
       <a name="width" val="4"/>
     </comp>
+    <comp lib="0" loc="(530,600)" name="Splitter">
+      <a name="facing" val="south"/>
+      <a name="fanout" val="3"/>
+      <a name="incoming" val="3"/>
+      <a name="appear" val="center"/>
+    </comp>
+    <comp lib="1" loc="(440,540)" name="OR Gate">
+      <a name="width" val="4"/>
+      <a name="size" val="30"/>
+      <a name="inputs" val="2"/>
+    </comp>
     <comp lib="3" loc="(450,410)" name="Shifter">
       <a name="shift" val="lr"/>
+    </comp>
+    <comp lib="0" loc="(530,660)" name="Pin">
+      <a name="facing" val="north"/>
+      <a name="width" val="4"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="ctrl"/>
+    </comp>
+    <comp lib="0" loc="(210,270)" name="Pin">
+      <a name="width" val="4"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="d2"/>
+    </comp>
+    <comp lib="2" loc="(850,270)" name="Multiplexer">
+      <a name="select" val="3"/>
+      <a name="width" val="4"/>
+      <a name="enable" val="false"/>
+    </comp>
+    <comp lib="0" loc="(400,240)" name="Splitter">
+      <a name="fanout" val="4"/>
+      <a name="incoming" val="4"/>
+      <a name="appear" val="center"/>
+    </comp>
+    <comp lib="0" loc="(560,410)" name="Bit Extender">
+      <a name="out_width" val="4"/>
     </comp>
   </circuit>
 </project>
