@@ -124,10 +124,10 @@ def writeRom(path,ins_set):
 
 
 if __name__ == "__main__":
-    lines = getLines('test.asm')
+    lines = getLines('msrf.asm')
     labels = getLabels(lines)
     instructions_set = assemble(lines,labels)
-    writeRom("rom.txt",instructions_set)
+    writeRom("msrf.txt",instructions_set)
     
 
 
