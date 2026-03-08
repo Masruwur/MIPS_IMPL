@@ -3,7 +3,7 @@ addi $t2, $zero, 5
 add $t0, $t1, $t2
 add $t3, $t0, $t2
 add $t4, $t3, $t0
-sw $t1, 3($t2)
+sw $t1, 3($t2) // A
 sll $t1, $t1, 1
 beq $t1, $t3, label1
 j end
@@ -19,7 +19,7 @@ label3:
 ori $t0, $t0, 5
 andi $t2, $t2, 10
 nor $t2, $t2, $t2
-j end
+j end //7Ad24
 label2:
 bneq $t0, $t2, label3
 end:

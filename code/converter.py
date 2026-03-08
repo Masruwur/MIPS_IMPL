@@ -22,7 +22,7 @@ instruction_types = {
     'I' : ['addi','subi','andi','ori','lw','sw','beq','bneq']
 }
 
-registers = {'$zero':format(0,'04b')}
+registers = {'$sp':format(6,'04b'),'$zero':format(0,'04b')}
 for i in range(5):
     reg = f"$t{i}"
     registers[reg] = format(i+1,'04b')
@@ -40,7 +40,7 @@ def getLabels(lines: list[str]):
     for line in lines:
         if line.endswith(':'):
             label = line[:-1]
-            labels[label] = format(idx,'08b')
+            labels[label] = format(idx+1,'08b') #due to stack init
         else:
             idx += 1
     
@@ -48,6 +48,8 @@ def getLabels(lines: list[str]):
 
 def assemble(lines: list[str],labels: dict[str,str]):
     decoded = []
+    stack_init = opcodes['addi'] + registers['$sp'] + registers['$sp'] + format(15,'04b')
+    decoded.append(stack_init)
     idx = 0
     for line in lines:
         if line.endswith(':'):
@@ -73,7 +75,7 @@ def assemble(lines: list[str],labels: dict[str,str]):
 
         elif op in instruction_types['I']:
             if op in ['beq','bneq']:
-                offset = int(labels[vals[2]],2) - (idx+1)
+                offset = (int(labels[vals[2]],2)-1) - (idx+1) #due to stack init
                 if(offset>7 or offset<-8):
                     raise ValueError("invalid branch")
                 imdt = format(offset & 0xF,'04b')
@@ -124,10 +126,10 @@ def writeRom(path,ins_set):
 
 
 if __name__ == "__main__":
-    lines = getLines('msrf.asm')
+    lines = getLines('test.asm')
     labels = getLabels(lines)
     instructions_set = assemble(lines,labels)
-    writeRom("msrf.txt",instructions_set)
+    writeRom("test.txt",instructions_set)
     
 
 
