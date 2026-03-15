@@ -126,10 +126,10 @@ def writeRom(path,ins_set):
 
 
 if __name__ == "__main__":
-    lines = getLines('bj.asm')
+    lines = getLines('ar.asm')
     labels = getLabels(lines)
     instructions_set = assemble(lines,labels)
-    writeRom("bj.txt",instructions_set)
+    writeRom("ar.txt",instructions_set)
     
 
 
