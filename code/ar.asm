@@ -50,4 +50,4 @@ lw   $t4, 2($t4)
 
 j end
 
-end:
+end:  // 0 E 5 9 E 
