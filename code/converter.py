@@ -66,7 +66,7 @@ def assemble(lines: list[str],labels: dict[str,str]):
             
         elif op in instruction_types['S']:
             imdt = int(vals[2])
-            if imdt > 15:
+            if imdt > 4:
                 raise ValueError("shift too large")
             ins = opcodes[op] + registers[vals[1]] + registers[vals[0]] + format(imdt,'04b')
     
@@ -94,11 +94,12 @@ def assemble(lines: list[str],labels: dict[str,str]):
                 ins = opcodes[op] + registers[memReg] + registers[vals[0]] + format(imdt,'04b')
                 
             else:
-                imdt = int(vals[2])
-                if imdt>15 :
+                offset = int(vals[2])
+                if (offset>7 or offset<-8) :
                      raise ValueError("value too large")
+                imdt = format(offset & 0xF,'04b')
                 
-                ins = opcodes[op] + registers[vals[1]] + registers[vals[0]] + format(imdt,'04b')
+                ins = opcodes[op] + registers[vals[1]] + registers[vals[0]] + imdt
 
         else:
             raise ValueError("invalid operation")
@@ -126,7 +127,7 @@ def writeRom(path,ins_set):
 
 
 if __name__ == "__main__":
-    lines = getLines('test.asm')
+    lines = getLines('test2.asm')
     labels = getLabels(lines)
     instructions_set = assemble(lines,labels)
     writeRom("test.txt",instructions_set)
